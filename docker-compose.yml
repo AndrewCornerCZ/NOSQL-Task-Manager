@@ -1,22 +1,24 @@
-version: '3.9'
-
 services:
-  redis:
-    image: redis:7
-    container_name: redis_server
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-
   web:
     build: .
-    container_name: nextjs_app
     ports:
       - "3000:3000"
-    env_file: .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - HOST=0.0.0.0
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=100
+      - REDIS_URL=redis://redis:6379
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
     depends_on:
       - redis
 
-volumes:
-  redis_data:
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
