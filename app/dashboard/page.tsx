@@ -1,31 +1,16 @@
-"use client";
-import { useState } from "react";
-import AddTask from "@/components/addTask";
-import Tasks from "@/components/dashboard";
-import ExitButton from "@/components/exitButtun";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import DashboardClient from "@/components/dashboardClient";
 
-export default function Dashboard() {
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
+export default async function Dashboard() {
+  const cookieStore = await cookies();
+  const userId = cookieStore.get("userId")?.value;
+  const userName = cookieStore.get("userName")?.value;
 
-  function handleTaskAdded() {
-    setRefreshTrigger((prev) => prev + 1);
+  // Pokud uživatel není přihlášen, přesměruj na home
+  if (!userId) {
+    redirect("/");
   }
 
-  return (
-    <main style={{ padding: "20px", maxWidth: "800px", margin: "0 auto" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "20px",
-        }}
-      >
-        <h1>Task Manager Dashboard</h1>
-        <ExitButton />
-      </div>
-      <AddTask onTaskAdded={handleTaskAdded} />
-      <Tasks refreshTrigger={refreshTrigger} />
-    </main>
-  );
+  return <DashboardClient userName={userName || "Uživatel"} />;
 }

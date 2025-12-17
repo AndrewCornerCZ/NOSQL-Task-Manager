@@ -46,14 +46,7 @@ export default function AddTask({ onTaskAdded }: AddTaskProps) {
   }
 
   return (
-    <div
-      style={{
-        marginBottom: "20px",
-        padding: "10px",
-        border: "1px solid #ccc",
-        borderRadius: "4px",
-      }}
-    >
+    <div className="card">
       <h2>Přidat nový task</h2>
       <form onSubmit={submit}>
         <input
@@ -62,12 +55,6 @@ export default function AddTask({ onTaskAdded }: AddTaskProps) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
-          style={{
-            display: "block",
-            marginBottom: "10px",
-            padding: "8px",
-            width: "100%",
-          }}
         />
         <input
           type="datetime-local"
@@ -75,24 +62,13 @@ export default function AddTask({ onTaskAdded }: AddTaskProps) {
           value={timeTill}
           onChange={(e) => setTimeTill(e.target.value)}
           required
-          style={{
-            display: "block",
-            marginBottom: "10px",
-            padding: "8px",
-            width: "100%",
-          }}
         />
-        <button
-          type="submit"
-          style={{ padding: "8px 16px", cursor: "pointer" }}
-        >
+        <button type="submit" className="btn-success">
           Přidat task
         </button>
       </form>
-      {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
-      {success && (
-        <p style={{ color: "green", marginTop: "10px" }}>{success}</p>
-      )}
+      {error && <p className="error">{error}</p>}
+      {success && <p className="success">{success}</p>}
     </div>
   );
 }

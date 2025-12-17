@@ -36,7 +36,7 @@ export default function LogIn() {
   }
 
   return (
-    <div>
+    <div className="card">
       <form onSubmit={submit}>
         <input
           type="email"
@@ -52,9 +52,11 @@ export default function LogIn() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Přihlásit se</button>
+        <button type="submit" className="btn-primary">
+          Přihlásit se
+        </button>
       </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="error">{error}</p>}
     </div>
   );
 }

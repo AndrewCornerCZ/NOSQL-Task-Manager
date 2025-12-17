@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     // přidat do seznamu uživatelů
     await redis.sadd("users", userId);
 
-    // Nastavit cookie s userID
+    // Nastavit cookie s userID a jménem
     const response = NextResponse.json({
       id: userId,
       name,
@@ -33,6 +33,13 @@ export async function POST(req: Request) {
     });
 
     response.cookies.set("userId", userId, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7, // 7 dní
+    });
+
+    response.cookies.set("userName", name, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",

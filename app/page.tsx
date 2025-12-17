@@ -3,10 +3,17 @@ import LogIn from "@/components/logIn";
 
 export default function Home() {
   return (
-    <main style={{ padding: "20px" }}>
+    <main>
       <h1>Task Manager</h1>
 
-      <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "20px",
+          marginTop: "20px",
+        }}
+      >
         <div>
           <h2>Registrace</h2>
           <SignUp />

@@ -22,10 +22,7 @@ export default function ExitButton() {
   }
 
   return (
-    <button
-      onClick={handleLogout}
-      style={{ padding: "8px 16px", cursor: "pointer" }}
-    >
+    <button onClick={handleLogout} className="btn-danger">
       Odhlásit se
     </button>
   );

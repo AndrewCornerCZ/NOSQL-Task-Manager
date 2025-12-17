@@ -38,7 +38,7 @@ export default function SignUp() {
   }
 
   return (
-    <div>
+    <div className="card">
       <form onSubmit={submit}>
         <input
           type="text"
@@ -61,9 +61,11 @@ export default function SignUp() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Vytvořit uživatele</button>
+        <button type="submit" className="btn-success">
+          Vytvořit uživatele
+        </button>
       </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="error">{error}</p>}
     </div>
   );
 }
